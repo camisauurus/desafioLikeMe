@@ -22,4 +22,16 @@ const obtenerRegistros = async () => {
     return rows
 }
 
-module.exports = { agregarRegistro, obtenerRegistros }
+const modificarRegistro = async (titulo, img, descripcion, id) => {
+    const consulta = "UPDATE posts SET titulo = $1, img = $2, descripcion = $3 WHERE id = $4"
+    const values = [titulo, img, descripcion, id]
+    const result = await pool.query(consulta, values)
+}
+
+const eliminarRegistro = async (id) => {
+    const consulta = "DELETE FROM posts WHERE id = $1"
+    const values = [id]
+    const result = await pool.query(consulta, values)
+}
+
+module.exports = { agregarRegistro, obtenerRegistros, modificarRegistro, eliminarRegistro }
